@@ -186,6 +186,18 @@ public:
 
     float GetImageScale();
 
+    // Map structure that stores the pointers to all KeyFrames and MapPoints.
+    //Map* mpMap;
+    Atlas* mpAtlas;
+
+    // ORB vocabulary used for place recognition and feature matching.
+    ORBVocabulary* mpVocabulary;
+
+    // Tracker. It receives a frame and computes the associated camera pose.
+    // It also decides when to insert a new keyframe, create some new MapPoints and
+    // performs relocalization if tracking fails.
+    Tracking* mpTracker;
+
 #ifdef REGISTER_TIMES
     void InsertRectTime(double& time);
     void InsertResizeTime(double& time);
@@ -201,21 +213,11 @@ private:
 
     // Input sensor
     eSensor mSensor;
-
-    // ORB vocabulary used for place recognition and feature matching.
-    ORBVocabulary* mpVocabulary;
-
+    
     // KeyFrame database for place recognition (relocalization and loop detection).
-    KeyFrameDatabase* mpKeyFrameDatabase;
+    KeyFrameDatabase* mpKeyFrameDatabase;   
 
-    // Map structure that stores the pointers to all KeyFrames and MapPoints.
-    //Map* mpMap;
-    Atlas* mpAtlas;
-
-    // Tracker. It receives a frame and computes the associated camera pose.
-    // It also decides when to insert a new keyframe, create some new MapPoints and
-    // performs relocalization if tracking fails.
-    Tracking* mpTracker;
+    
 
     // Local Mapper. It manages the local map and performs local bundle adjustment.
     LocalMapping* mpLocalMapper;
